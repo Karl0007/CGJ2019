@@ -85,6 +85,7 @@ public class PlayerManager : MonoBehaviour
 			if (m_doubleJump)
 			{
 				m_doubleJump = false;
+				m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, 0);
 				m_rigidbody.AddForce(new Vector2(0, ConstData.PlayerJump), ForceMode2D.Impulse);
 			}
 
@@ -95,5 +96,5 @@ public class PlayerManager : MonoBehaviour
 	void Update()
     {
 		MoveUpdate();
-    }
+	}
 }
