@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MoveManager : MonoBehaviour
 {
-	public float X, Y, T;
+	public float X, Y, T,T2;
 	private float centerx, centery,time;
 
 	// Start is called before the first frame update
     void Start()
     {
-		time = 0;
+		time = T2;
 		centerx = transform.position.x;
 		centery = transform.position.y;
     }
@@ -20,6 +20,6 @@ public class MoveManager : MonoBehaviour
     {
 		time += Time.deltaTime;
 		if (time > T) time = 0;
-		transform.position = new Vector3(centerx + X*Mathf.Cos((time / T) * 3.14f * 2) ,centery + Y*Mathf.Sin((time / T) * 3.14f * 2), transform.position.z);
+		transform.position = new Vector3(centerx + X*Mathf.Cos((time / (T)) * 3.14f * 2) ,centery + Y*Mathf.Sin((time / (T)) * 3.14f * 2), transform.position.z);
 	}
 }

@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
 	public Collider2D m_downCollider;
 	public Rigidbody2D m_rigidbody;
 
+	private bool m_canmove;
 	private bool m_doubleJump;
 
     // Start is called before the first frame update
@@ -27,8 +28,12 @@ public class PlayerManager : MonoBehaviour
 		bool up = Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W);
 		bool down = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
 
+		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+		{
+			m_canmove = true;
+		}
 
-		if (left)
+		if (left && m_canmove)
 		{
 			//向左移动
 			m_rigidbody.AddForce(new Vector2(-ConstData.PlayerAcc,0), ForceMode2D.Force);
@@ -44,7 +49,7 @@ public class PlayerManager : MonoBehaviour
 			}
 		}
 
-		if (right)
+		if (right && m_canmove)
 		{
 			//向右移动
 			m_rigidbody.AddForce(new Vector2(ConstData.PlayerAcc, 0), ForceMode2D.Force);
@@ -72,14 +77,16 @@ public class PlayerManager : MonoBehaviour
 			//爬墙跳
 			if (m_rightCollider.IsTouchingLayers(Wall) && right)
 			{
+				m_canmove = false;
 				m_doubleJump = false;
-				m_rigidbody.AddForce(new Vector2(-ConstData.PlayerRef, ConstData.PlayerJump), ForceMode2D.Impulse);
+				m_rigidbody.AddForce(new Vector2(-ConstData.PlayerRef, ConstData.PlayerJump * 1.3f), ForceMode2D.Impulse);
 			}
 			else
 			if (m_leftCollider.IsTouchingLayers(Wall) && left)
 			{
+				m_canmove = false;
 				m_doubleJump = false;
-				m_rigidbody.AddForce(new Vector2(ConstData.PlayerRef, ConstData.PlayerJump), ForceMode2D.Impulse);
+				m_rigidbody.AddForce(new Vector2(ConstData.PlayerRef, ConstData.PlayerJump * 1.3f), ForceMode2D.Impulse);
 			}else
 			//双跳
 			if (m_doubleJump)
@@ -97,4 +104,11 @@ public class PlayerManager : MonoBehaviour
     {
 		MoveUpdate();
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.layer == 12) Debug.Log("gameover");
+
+	}
+
 }
