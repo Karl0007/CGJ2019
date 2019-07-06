@@ -27,5 +27,6 @@ public class MaskManager : MonoBehaviour
 
 	private void OnCollisionStay2D(Collision2D collision)
 	{
+
 	}
 }

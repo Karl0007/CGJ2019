@@ -9,6 +9,7 @@ public class PlayAnimation : MonoBehaviour {
     public bool destroy = false;
     public bool direction = true;
     public bool oneTime = false;
+    public float speed = 1;
 
     private int index = 0;
     private int frameNumber = 3;
@@ -22,7 +23,7 @@ public class PlayAnimation : MonoBehaviour {
 
         if (!oneTime)
         {
-            myTime += Time.deltaTime;
+            myTime += Time.deltaTime*(1/ speed);
             myIndex = (int)(myTime * (frameNumber - 1));
             index = myIndex % frameNumber;
         }

@@ -23,7 +23,7 @@ public class ActorState : MonoBehaviour
 
     void Start()
     {
-
+        SetState(State.Idle);
     }
 
     public void SetState(State s)
@@ -32,6 +32,7 @@ public class ActorState : MonoBehaviour
 		{
 			return;
 		}
+
 		state = s;
         leftGo.SetActive(false);
         rightGo.SetActive(false);
