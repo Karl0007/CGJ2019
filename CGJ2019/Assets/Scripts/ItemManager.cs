@@ -19,6 +19,9 @@ public class ItemManager : MonoBehaviour
     {
     }
 
+
+    
+
     bool Check()
     {
         switch (m_type)

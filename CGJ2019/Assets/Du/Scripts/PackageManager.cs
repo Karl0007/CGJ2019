@@ -23,6 +23,12 @@ public class PackageManager
         key,
     }
 
+
+    public void Clear()
+    {
+        itemDic.Clear();
+    }
+
     public void Add(Item i)
     {
         if (itemDic.ContainsKey(i))

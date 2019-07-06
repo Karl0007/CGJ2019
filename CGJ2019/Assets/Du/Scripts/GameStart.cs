@@ -8,7 +8,7 @@ public class GameStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SingletonT<PackageManager>.Instance.Clear();
     }
 
     public void StartGame()
