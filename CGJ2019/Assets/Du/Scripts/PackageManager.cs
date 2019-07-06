@@ -81,8 +81,8 @@ public class PackageManager
 
     public void Exchange(Item i1, Item i2)
     {
-        Add(i2);
-        Delete(i1);
+        Add(i1);
+        Delete(i2);
     }
 
 

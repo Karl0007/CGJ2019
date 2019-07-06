@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
 	public Collider2D m_leftCollider;
 	public Collider2D m_downCollider;
 	public Rigidbody2D m_rigidbody;
+	public ActorState m_actorState;
 
 	private bool m_canmove;
 	private bool m_doubleJump;
@@ -16,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+		m_actorState = GetComponentInChildren<ActorState>();
     }
 
 	//玩家移动
@@ -33,8 +34,18 @@ public class PlayerManager : MonoBehaviour
 			m_canmove = true;
 		}
 
+		if (m_rigidbody.velocity.x > 0)
+		{
+			m_actorState.SetState(ActorState.State.Right);
+		}
+		else
+		{
+			m_actorState.SetState(ActorState.State.Left);
+		}
+
 		if (left && m_canmove)
 		{
+			m_actorState.SetState(ActorState.State.Left);
 			//向左移动
 			m_rigidbody.AddForce(new Vector2(-ConstData.PlayerAcc,0), ForceMode2D.Force);
 			//最大速度
@@ -45,6 +56,7 @@ public class PlayerManager : MonoBehaviour
 			//爬墙
 			if (m_leftCollider.IsTouchingLayers(Wall) && !m_downCollider.IsTouchingLayers(Wall))
 			{
+				m_actorState.SetState(ActorState.State.LeftWall);
 				m_rigidbody.AddForce(new Vector2(0, ConstData.PlayerFri), ForceMode2D.Force);
 			}
 		}
@@ -61,6 +73,7 @@ public class PlayerManager : MonoBehaviour
 			//爬墙
 			if (m_rightCollider.IsTouchingLayers(Wall) && !m_downCollider.IsTouchingLayers(Wall))
 			{
+				m_actorState.SetState(ActorState.State.RightWall);
 				m_rigidbody.AddForce(new Vector2(0, ConstData.PlayerFri), ForceMode2D.Force);
 			}
 		}
