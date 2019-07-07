@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - CameraSmall
+  - Heart
+  - CreatHeart
   layers:
   - Default
   - TransparentFX

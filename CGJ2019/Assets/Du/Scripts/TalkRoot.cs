@@ -49,13 +49,15 @@ public class TalkRoot : MonoBehaviour
         } else
         {
             this.gameObject.SetActive(false);
-        }
-        
-    }
+			PlayerManager.UnLock();
+
+		}
+	}
 
     void ShowTalk(TalkInfo info)
     {
-        WillTool.GetChildInDepth<Text>("Name", transform).text = info.name;
+		PlayerManager.Lock();
+		WillTool.GetChildInDepth<Text>("Name", transform).text = info.name;
         WillTool.GetChildInDepth<Text>("Content", transform).text = info.content;
         WillTool.GetChildInDepth<TypewriterEffect>("Content", transform).OnStart();
 

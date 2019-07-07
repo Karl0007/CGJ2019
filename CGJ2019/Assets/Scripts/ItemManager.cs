@@ -48,19 +48,18 @@ public class ItemManager : MonoBehaviour
         {
             case PackageManager.Item.Axe:
                 SingletonT<PackageManager>.Instance.Add(PackageManager.Item.Axe);
-                Destroy(gameObject);
+				//Destroy(gameObject);
                 break;
             case PackageManager.Item.apple:
                 SingletonT<PackageManager>.Instance.Exchange(PackageManager.Item.Axe, PackageManager.Item.apple);
-                Destroy(gameObject);
-                break;
+				//Destroy(gameObject);
+				break;
             case PackageManager.Item.zhurou:
                 SingletonT<PackageManager>.Instance.Exchange(PackageManager.Item.apple, PackageManager.Item.zhurou);
-				Destroy(gameObject);
+				//Destroy(gameObject);
 				break;
             case PackageManager.Item.key:
                 SingletonT<PackageManager>.Instance.Delete(PackageManager.Item.zhurou);
-                Door.transform.position = new Vector3(Door.transform.position.x, Door.transform.position.y + 3);
                 //Destroy(gameObject);
                 break;
             case PackageManager.Item.piqiu:
@@ -71,14 +70,15 @@ public class ItemManager : MonoBehaviour
                 return false;
         }
 
-        return true;
+		GameManager.Instance.ItemAction(m_type);
+		return true;
         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.layer);
-        Debug.Log(Check());
+        //Debug.Log(collision.gameObject.layer);
+        //Debug.Log(Check());
         if (collision.gameObject.layer == Player && Check())
         {
             Icon.SetActive(true);

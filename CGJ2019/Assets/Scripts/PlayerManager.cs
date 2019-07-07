@@ -11,18 +11,25 @@ public class PlayerManager : MonoBehaviour
 	public Collider2D m_downCollider;
 	public Rigidbody2D m_rigidbody;
 	public ActorState m_actorState;
-    public int m_bloodNum = 3;
+
+	public GameObject MyHeart;
+
+	public int m_bloodNum = 3;
     public float m_hurtProtectTime = 3;
 
+	private float m_heartCD;
     private bool m_canmove;
 	private bool m_doubleJump;
+	private static bool m_lock;
 
     private GameObject m_BloodRoot;
+
+	const int Heart = 12;
 
     public bool m_CanBeHurt = true;
 
     [Header("受伤回弹的参数")]
-    public float springBackFactor = 1;
+    public float springBackFactor = 5f;
 
 
     // Start is called before the first frame update
@@ -30,29 +37,56 @@ public class PlayerManager : MonoBehaviour
     {
 		m_actorState = GetComponentInChildren<ActorState>();
         m_BloodRoot = GameObject.Find("Bloods");
+		ShowBlood();
+		m_canmove = true;
+		m_lock = false;
     }
+
+	static public void Lock()
+	{
+		m_lock = true;
+	}
+
+	static public void UnLock()
+	{
+		m_lock = false;
+	}
 
 	//玩家移动
 	private void MoveUpdate()
 	{
+		if (m_lock)
+		{
+			if (Input.anyKeyDown)
+			{
+
+			}
+			return;
+		}
 		const int Wall = 1 << 8; 
 		bool left = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
 		bool right = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
 		bool up = Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W);
 		bool down = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
 
-		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A) || m_downCollider.IsTouchingLayers(Wall))
 		{
 			m_canmove = true;
 		}
-
-		if (m_rigidbody.velocity.x > 0)
+		if (Mathf.Abs(m_rigidbody.velocity.x) > 0.01f)
 		{
-			m_actorState.SetState(ActorState.State.Right);
+			if (m_rigidbody.velocity.x > 0)
+			{
+				m_actorState.SetState(ActorState.State.Right);
+			}
+			else
+			{
+				m_actorState.SetState(ActorState.State.Left);
+			}
 		}
 		else
 		{
-			m_actorState.SetState(ActorState.State.Left);
+			m_actorState.SetState(ActorState.State.Idle);
 		}
 
 		if (left && m_canmove)
@@ -133,31 +167,73 @@ public class PlayerManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+		if (m_heartCD > 0) m_heartCD -= Time.deltaTime;
 		MoveUpdate();
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.tag == "CreatHeart")
+		{
+
+		}
+		if (m_lock) return;
+		if (collision.tag == "CreatHeart" && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
+		{
+			Hurt(collision);
+			Instantiate(MyHeart);
+		}
+
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.tag == "CameraSmall")
+		{
+			CameraManager.CameraSize = 7;
+		}
+	}
+
+	private void Hurt(Collider2D collision)
+	{
+		m_CanBeHurt = false;
+		//Debug.Log("!!!!!!!!!!!OnTrigher 12");
+		m_bloodNum--;
+		if (m_bloodNum <= 0)
+		{
+			//Debug.Log("GameOver");
+			SceneManager.LoadScene("End");
+
+		}
+		else
+		{
+			Invoke("EndProtectTime", this.m_hurtProtectTime);
+			Vector3 off = (this.transform.position - collision.transform.position).normalized * springBackFactor;
+			m_rigidbody.velocity = Vector2.zero;
+			m_rigidbody.AddForce(new Vector2(off.x, off.y), ForceMode2D.Impulse);
+			PlayAudio.Play(this.gameObject, "Sound/受伤");
+		}
+		ShowBlood();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.layer == 12&&m_CanBeHurt)
-        {
-            m_CanBeHurt = false;
-            Debug.Log("!!!!!!!!!!!OnTrigher 12");
-            m_bloodNum--;
-            if(m_bloodNum<=0)
-            {
-                Debug.Log("GameOver");
-                SceneManager.LoadScene("End");
-                
-            }else
-            {
-                Invoke("EndProtectTime",this.m_hurtProtectTime);
-                Vector3 off = (this.transform.position -collision.transform.position).normalized * springBackFactor;
+		if (collision.tag == "CameraSmall")
+		{
+			CameraManager.CameraSize = 16;
+		}
 
-                m_rigidbody.AddForce(new Vector2(off.x, off.y), ForceMode2D.Impulse);
-                PlayAudio.Play(this.gameObject,"Sound/受伤");
-            }
-            ShowBlood();
-            
+		if (collision.tag == "Heart" && m_heartCD <= 0)
+		{
+			m_heartCD = 1;
+			m_bloodNum++;
+			m_bloodNum = Mathf.Min(10, m_bloodNum);
+			ShowBlood();
+		}
+
+		if (collision.gameObject.layer == Heart && m_CanBeHurt)
+        {
+			Hurt(collision);
         }
 	}
 
@@ -169,7 +245,7 @@ public class PlayerManager : MonoBehaviour
     private void ShowBlood()
     {
         
-        for (int i=1;i<=3;i++)
+        for (int i=1;i<=10;i++)
         {
             if(i<=this.m_bloodNum)
             {
