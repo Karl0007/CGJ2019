@@ -2255,7 +2255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &538487848
 Rigidbody2D:
   serializedVersion: 4
@@ -10687,12 +10687,12 @@ PrefabInstance:
     - target: {fileID: 3991225123180373638, guid: 1974920a2e04b4a48aa878e948034068,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.4
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: 3991225123180373638, guid: 1974920a2e04b4a48aa878e948034068,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3
+      value: -5.68
       objectReference: {fileID: 0}
     - target: {fileID: 3991225123180373638, guid: 1974920a2e04b4a48aa878e948034068,
         type: 3}

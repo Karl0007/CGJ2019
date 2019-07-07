@@ -92,4 +92,12 @@ public class TalkRoot : MonoBehaviour
         imageTarget.SetActive(true);
         imageTarget.GetComponent<Image>().sprite = Resources.Load<Sprite>(info.imageSource);
     }
+
+	private void Update()
+	{
+		if (Input.anyKeyDown)
+		{
+			Click();
+		}
+	}
 }

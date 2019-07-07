@@ -57,10 +57,6 @@ public class PlayerManager : MonoBehaviour
 	{
 		if (m_lock)
 		{
-			if (Input.anyKeyDown)
-			{
-
-			}
 			return;
 		}
 		const int Wall = 1 << 8; 
@@ -173,15 +169,12 @@ public class PlayerManager : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.tag == "CreatHeart")
-		{
-
-		}
 		if (m_lock) return;
-		if (collision.tag == "CreatHeart" && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
+		if (collision.tag == "CreatHeart" && (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) && m_CanBeHurt)
 		{
+			Debug.Log(2333);
 			Hurt(collision);
-			Instantiate(MyHeart);
+			Instantiate(MyHeart).SetActive(true);
 		}
 
 	}
@@ -218,6 +211,11 @@ public class PlayerManager : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (collision.tag == "CreatHeart")
+		{
+
+		}
+
 		if (collision.tag == "CameraSmall")
 		{
 			CameraManager.CameraSize = 16;
