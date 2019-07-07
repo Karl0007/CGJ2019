@@ -93,14 +93,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 21300024, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
-  - {fileID: 21300026, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
-  - {fileID: 21300028, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
-  - {fileID: 21300030, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
+  - {fileID: 21300000, guid: 45de892b7e11cd44b9b0ccae6a97c381, type: 3}
+  - {fileID: 21300000, guid: b5e5685c4a2aeb34dbfdc93b9603811f, type: 3}
+  - {fileID: 21300000, guid: b5bfc4cbd691cde498e141187a61b9a2, type: 3}
+  - {fileID: 21300000, guid: 45715643d956a2549a0d2a73939034ba, type: 3}
+  - {fileID: 21300000, guid: bd14df24d02cc9f499b8b3bbec62a279, type: 3}
+  - {fileID: 21300000, guid: 39193f7682a6974479785d44d4544674, type: 3}
   lastFrameNo: 0
   destroy: 0
   direction: 1
   oneTime: 0
+  speed: 1
 --- !u!1 &1184848921508642
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +185,7 @@ Transform:
   m_GameObject: {fileID: 1297936350248996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4215426464374840}
   m_RootOrder: 0
@@ -248,14 +251,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 21300008, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
-  - {fileID: 21300010, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
-  - {fileID: 21300012, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
-  - {fileID: 21300014, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
+  - {fileID: 21300000, guid: 45de892b7e11cd44b9b0ccae6a97c381, type: 3}
+  - {fileID: 21300000, guid: b5e5685c4a2aeb34dbfdc93b9603811f, type: 3}
+  - {fileID: 21300000, guid: b5bfc4cbd691cde498e141187a61b9a2, type: 3}
+  - {fileID: 21300000, guid: 45715643d956a2549a0d2a73939034ba, type: 3}
+  - {fileID: 21300000, guid: bd14df24d02cc9f499b8b3bbec62a279, type: 3}
+  - {fileID: 21300000, guid: 39193f7682a6974479785d44d4544674, type: 3}
   lastFrameNo: 0
   destroy: 0
   direction: 1
   oneTime: 0
+  speed: 1
 --- !u!1 &1300369552070506
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 1300369552070506}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4215426464374840}
   m_RootOrder: 2
@@ -325,15 +331,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300072, guid: d7842932dcc2dbd4b85bf8a1e6bc198f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45de892b7e11cd44b9b0ccae6a97c381, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.2, y: 1.2}
+  m_Size: {x: 0.69, y: 0.69}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &114350239243586796
@@ -357,6 +363,7 @@ MonoBehaviour:
   destroy: 0
   direction: 1
   oneTime: 0
+  speed: 1
 --- !u!1 &1465504341385678
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4113979407838232
 Transform:
   m_ObjectHideFlags: 0
@@ -426,7 +433,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c0f73a0f4feb5144aff189b05d8c974, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45de892b7e11cd44b9b0ccae6a97c381, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -458,6 +465,7 @@ MonoBehaviour:
   destroy: 0
   direction: 1
   oneTime: 0
+  speed: 1
 --- !u!1 &1677905637758004
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,15 +535,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300072, guid: d7842932dcc2dbd4b85bf8a1e6bc198f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45de892b7e11cd44b9b0ccae6a97c381, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.2, y: 1.2}
+  m_Size: {x: 0.69, y: 0.69}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &114102264137436672
@@ -559,3 +567,4 @@ MonoBehaviour:
   destroy: 0
   direction: 1
   oneTime: 0
+  speed: 1
