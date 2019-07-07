@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
 	public Rigidbody2D m_rigidbody;
 	public ActorState m_actorState;
 
+	public GameObject MyCi;
 	public GameObject MyHeart;
 
 	public int m_bloodNum = 3;
@@ -172,9 +173,17 @@ public class PlayerManager : MonoBehaviour
 		if (m_lock) return;
 		if (collision.tag == "CreatHeart" && (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) && m_CanBeHurt)
 		{
-			Debug.Log(2333);
-			Hurt(collision);
-			Instantiate(MyHeart).SetActive(true);
+			if (m_bloodNum > 0)
+			{
+				m_bloodNum--;
+				Instantiate(MyHeart).SetActive(true);
+			}
+			if (m_bloodNum < 0)
+			{
+				m_bloodNum++;
+				Instantiate(MyHeart).SetActive(true);
+			}
+
 		}
 
 	}
