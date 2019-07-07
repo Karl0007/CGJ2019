@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class TalkRoot : MonoBehaviour
 {
+    private static TalkRoot s_talkRoot;
+
     private int showIndex = 0;
-    class TalkInfo
+    public class TalkInfo
     {
         public string name;
         public string content;
@@ -25,19 +27,32 @@ public class TalkRoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Init();
-        talkInfoList.Add(new TalkInfo("杜1","Hello你好啊啊啊啊啊啊","head/man"));
-        talkInfoList.Add(new TalkInfo("杜2","Hello你好啊啊啊啊啊啊", "head/man"));
-        talkInfoList.Add(new TalkInfo("杜3","Hello你好啊啊啊啊啊啊", "head/woman",true));
-        talkInfoList.Add(new TalkInfo("杜4","Hello你好啊啊啊啊啊啊", "head/man"));
-        talkInfoList.Add(new TalkInfo("杜5","Hello你好啊啊啊啊啊啊", "head/woman",true));
-
-        ShowTalk(talkInfoList[0]);
+        s_talkRoot = this;
+        FirtInit();
     }
 
-    private void Init()
+    private void OnGUI()
     {
-        
+       
+    }
+
+    private void FirtInit()
+    {
+        List<TalkInfo> talkInfoList = new List<TalkInfo>();
+        talkInfoList.Add(new TalkInfo("杜1", "Hello你好啊啊啊啊啊啊", "head/man"));
+        talkInfoList.Add(new TalkInfo("杜2", "Hello你好啊啊啊啊啊啊", "head/man"));
+        talkInfoList.Add(new TalkInfo("杜3", "Hello你好啊啊啊啊啊啊", "head/woman", true));
+        talkInfoList.Add(new TalkInfo("杜4", "Hello你好啊啊啊啊啊啊", "head/man"));
+        talkInfoList.Add(new TalkInfo("杜5", "Hello你好啊啊啊啊啊啊", "head/woman", true));
+        ShowTalkList(talkInfoList);
+    }
+
+    public static void ShowTalkList(List<TalkInfo> talkInfoList)
+    {
+        s_talkRoot.showIndex = 0;
+        s_talkRoot.talkInfoList = talkInfoList;
+        s_talkRoot.gameObject.SetActive(true);
+        s_talkRoot.ShowTalk(talkInfoList[0]);
     }
 
     public void Click()

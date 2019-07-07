@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayAnimation : MonoBehaviour {
+public class PlayAnimation : MonoBehaviour
+{
 
     public Sprite[] frames;
     public int lastFrameNo = 0;
@@ -17,13 +18,28 @@ public class PlayAnimation : MonoBehaviour {
     private float myTime = 0;
     private int myIndex = 0;
 
+
+    //public void OnGUI()
+    //{
+    //    if (GUILayout.Button("Test"))
+    //    {
+    //        List<TalkRoot.TalkInfo> talkInfoList = new List<TalkRoot.TalkInfo>();
+    //        talkInfoList.Add(new TalkRoot.TalkInfo("杜1", "Hello你好啊啊啊啊啊啊", "head/man"));
+    //        talkInfoList.Add(new TalkRoot.TalkInfo("杜2", "Hello你好啊啊啊啊啊啊", "head/man"));
+    //        talkInfoList.Add(new TalkRoot.TalkInfo("杜3", "Hello你好啊啊啊啊啊啊", "head/woman", true));
+    //        talkInfoList.Add(new TalkRoot.TalkInfo("杜4", "Hello你好啊啊啊啊啊啊", "head/man"));
+    //        talkInfoList.Add(new TalkRoot.TalkInfo("杜5", "Hello你好啊啊啊啊啊啊", "head/woman", true));
+    //        TalkRoot.ShowTalkList(talkInfoList);
+    //    }
+    //}
+
     void Update()
     {
         frameNumber = frames.Length;
 
         if (!oneTime)
         {
-            myTime += Time.deltaTime*(1/ speed);
+            myTime += Time.deltaTime * (1 / speed);
             myIndex = (int)(myTime * (frameNumber - 1));
             index = myIndex % frameNumber;
         }
