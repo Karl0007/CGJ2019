@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     private GameObject m_BloodRoot;
     private GameObject m_BlackRoot;
 
+    private float m_canCreat = 0;
+
     const int Heart = 12;
 
     public bool m_CanBeHurt = true;
@@ -37,6 +39,9 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        m_canCreat = 0;
+
         m_actorState = GetComponentInChildren<ActorState>();
         m_BloodRoot = GameObject.Find("Bloods");
         m_BlackRoot = GameObject.Find("Blacks");
@@ -169,23 +174,27 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         if (m_heartCD > 0) m_heartCD -= Time.deltaTime;
+        if (m_canCreat > 0) m_canCreat -= Time.deltaTime;
+
         MoveUpdate();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (m_lock) return;
-        if (collision.tag == "CreatHeart" && (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) && m_CanBeHurt)
+        if (m_canCreat <= 0 && collision.tag == "CreatHeart" && (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) && m_CanBeHurt)
         {
             if (m_bloodNum > 0)
             {
+                m_canCreat = 1;
                 m_bloodNum--;
                 Instantiate(MyHeart).SetActive(true);
             }
             if (m_bloodNum < 0)
             {
+                m_canCreat = 1;
                 m_bloodNum++;
-                Instantiate(MyHeart).SetActive(true);
+                Instantiate(MyCi).SetActive(true);
             }
 
         }
@@ -238,6 +247,7 @@ public class PlayerManager : MonoBehaviour
         {
             Hurt(collision);
         }
+        ShowBlood();
     }
 
     public void EndProtectTime()

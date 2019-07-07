@@ -9,6 +9,9 @@ TagManager:
   - Heart
   - CreatHeart
   - Play
+  - End
+  - Ci
+  - H
   layers:
   - Default
   - TransparentFX
