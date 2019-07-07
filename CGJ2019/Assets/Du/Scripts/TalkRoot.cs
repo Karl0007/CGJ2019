@@ -40,7 +40,7 @@ public class TalkRoot : MonoBehaviour
     {
         List<TalkInfo> talkInfoList = new List<TalkInfo>();
         talkInfoList.Add(new TalkInfo("杜1", "Hello你好啊啊啊啊啊啊", "head/man"));
-        talkInfoList.Add(new TalkInfo("杜2", "Hello你好啊啊啊啊啊啊", "head/man"));
+        talkInfoList.Add(new TalkInfo("杜2", "Hello你好啊啊啊啊啊啊", null));
         talkInfoList.Add(new TalkInfo("杜3", "Hello你好啊啊啊啊啊啊", "head/woman", true));
         talkInfoList.Add(new TalkInfo("杜4", "Hello你好啊啊啊啊啊啊", "head/man"));
         talkInfoList.Add(new TalkInfo("杜5", "Hello你好啊啊啊啊啊啊", "head/woman", true));
@@ -89,7 +89,14 @@ public class TalkRoot : MonoBehaviour
         {
             imageTarget = imageTarget2;
         }
-        imageTarget.SetActive(true);
-        imageTarget.GetComponent<Image>().sprite = Resources.Load<Sprite>(info.imageSource);
+        if(string.IsNullOrEmpty(info.imageSource))
+        {
+
+        }else
+        {
+            imageTarget.SetActive(true);
+            imageTarget.GetComponent<Image>().sprite = Resources.Load<Sprite>(info.imageSource);
+
+        }
     }
 }
