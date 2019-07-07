@@ -39,11 +39,9 @@ public class TalkRoot : MonoBehaviour
     private void FirtInit()
     {
         List<TalkInfo> talkInfoList = new List<TalkInfo>();
-        talkInfoList.Add(new TalkInfo("杜1", "Hello你好啊啊啊啊啊啊", "head/man"));
-        talkInfoList.Add(new TalkInfo("杜2", "Hello你好啊啊啊啊啊啊", null));
-        talkInfoList.Add(new TalkInfo("杜3", "Hello你好啊啊啊啊啊啊", "head/woman", true));
-        talkInfoList.Add(new TalkInfo("杜4", "Hello你好啊啊啊啊啊啊", "head/man"));
-        talkInfoList.Add(new TalkInfo("杜5", "Hello你好啊啊啊啊啊啊", "head/woman", true));
+        talkInfoList.Add(new TalkInfo("???：", "追求得到之日即其失去之时", "head/man"));
+        talkInfoList.Add(new TalkInfo("Rhern:", "唔……只是一场梦么……\n（揉揉耳朵）", null));
+        talkInfoList.Add(new TalkInfo("Rhern:", "我要继续出发了，还有人在等我", "head/woman", true));
         ShowTalkList(talkInfoList);
     }
 
