@@ -43,7 +43,8 @@ public class ItemManager : MonoBehaviour
 
     bool Action()
     {
-        if (!Check()) return false;
+		bool res = true;
+        if (!Check()) res = false;
         switch (m_type)
         {
             case PackageManager.Item.Axe:
@@ -67,11 +68,11 @@ public class ItemManager : MonoBehaviour
                 Destroy(gameObject);
                 break;
             default:
-                return false;
+                return res;
         }
 
-		GameManager.Instance.ItemAction(m_type);
-		return true;
+		GameManager.Instance.ItemAction(m_type,res);
+		return res;
         
     }
 
