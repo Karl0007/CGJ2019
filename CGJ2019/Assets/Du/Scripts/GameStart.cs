@@ -13,12 +13,14 @@ public class GameStart : MonoBehaviour
 
     public void StartGame()
     {
-        Invoke("StartGame1", 0.4f);
+		SingletonT<PackageManager>.Instance.Clear();
+		Invoke("StartGame1", 0.4f);
         
     }
 
     public void StartGame1()
     {
-        SceneManager.LoadScene("SampleScene");
+		SingletonT<PackageManager>.Instance.Clear();
+		SceneManager.LoadScene("SampleScene");
     }
 }

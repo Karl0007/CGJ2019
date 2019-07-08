@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		if (!Instance) Instance = this;
-		DontDestroyOnLoad(this);
 	}
 
 	public GameObject Axe;

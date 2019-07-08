@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject MyCi;
     public GameObject MyHeart;
 
-    public int m_bloodNum = 3;
+    public int m_bloodNum = 5;
     public float m_hurtProtectTime = 3;
 
     private float m_heartCD;
@@ -45,7 +45,7 @@ public class PlayerManager : MonoBehaviour
         m_actorState = GetComponentInChildren<ActorState>();
         m_BloodRoot = GameObject.Find("Bloods");
         m_BlackRoot = GameObject.Find("Blacks");
-
+		Debug.Log(m_bloodNum);
         ShowBlood();
         m_canmove = true;
         m_lock = false;
