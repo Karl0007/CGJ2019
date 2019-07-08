@@ -14,7 +14,7 @@ public class TypewriterEffect : MonoBehaviour
     public UnityEvent myEvent;
     public int charsPerSecond = 0;
     // public AudioClip mAudioClip;             // 打字的声音，不是没打一个字播放一下，开始的时候播放结束就停止播放
-    private bool isActive = false;
+    public bool isActive = false;
 
     private float timer;
     private string words;
@@ -63,7 +63,7 @@ public class TypewriterEffect : MonoBehaviour
         }
     }
 
-    void OnFinish()
+    public void OnFinish()
     {
         isActive = false;
         timer = 0;
@@ -77,6 +77,7 @@ public class TypewriterEffect : MonoBehaviour
             Debug.Log("问题");
         }
     }
+
 
     void Update()
     {

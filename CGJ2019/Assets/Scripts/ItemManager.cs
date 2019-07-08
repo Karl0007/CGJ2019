@@ -43,35 +43,38 @@ public class ItemManager : MonoBehaviour
 
     bool Action()
     {
-		bool res = true;
-        if (!Check()) res = false;
-        switch (m_type)
-        {
-            case PackageManager.Item.Axe:
-                SingletonT<PackageManager>.Instance.Add(PackageManager.Item.Axe);
-				//Destroy(gameObject);
-                break;
-            case PackageManager.Item.apple:
-                SingletonT<PackageManager>.Instance.Exchange(PackageManager.Item.Axe, PackageManager.Item.apple);
-				//Destroy(gameObject);
-				break;
-            case PackageManager.Item.zhurou:
-                SingletonT<PackageManager>.Instance.Exchange(PackageManager.Item.apple, PackageManager.Item.zhurou);
-				//Destroy(gameObject);
-				break;
-            case PackageManager.Item.key:
-                SingletonT<PackageManager>.Instance.Delete(PackageManager.Item.zhurou);
-                //Destroy(gameObject);
-                break;
-            case PackageManager.Item.piqiu:
-                SingletonT<PackageManager>.Instance.Add(PackageManager.Item.piqiu);
-                Destroy(gameObject);
-                break;
-            default:
-                return res;
-        }
-
-		GameManager.Instance.ItemAction(m_type,res);
+		bool res = Check();
+		if (res)
+		{
+			switch (m_type)
+			{
+				case PackageManager.Item.Axe:
+					SingletonT<PackageManager>.Instance.Add(PackageManager.Item.Axe);
+					//Destroy(gameObject);
+					break;
+				case PackageManager.Item.apple:
+					SingletonT<PackageManager>.Instance.Exchange(PackageManager.Item.Axe, PackageManager.Item.apple);
+					//Destroy(gameObject);
+					break;
+				case PackageManager.Item.zhurou:
+					SingletonT<PackageManager>.Instance.Exchange(PackageManager.Item.apple, PackageManager.Item.zhurou);
+					//Destroy(gameObject);
+					break;
+				case PackageManager.Item.key:
+					SingletonT<PackageManager>.Instance.Delete(PackageManager.Item.zhurou);
+					Debug.Log(SingletonT<PackageManager>.Instance.Check(PackageManager.Item.zhurou));
+					//Destroy(gameObject);
+					break;
+				case PackageManager.Item.piqiu:
+					SingletonT<PackageManager>.Instance.Add(PackageManager.Item.piqiu);
+					Destroy(gameObject);
+					break;
+				default:
+					res = false;
+					break;
+			}
+		}
+		GameManager.Instance.ItemAction(m_type, res);
 		return res;
         
     }
@@ -101,7 +104,7 @@ public class ItemManager : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && !PlayerManager.isLock())
         {
             if (Action())
             {

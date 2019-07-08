@@ -51,6 +51,11 @@ public class PlayerManager : MonoBehaviour
         m_lock = false;
     }
 
+	static public bool isLock()
+	{
+		return m_lock;
+	}
+
     static public void Lock()
     {
         m_lock = true;

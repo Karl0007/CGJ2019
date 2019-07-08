@@ -8,6 +8,7 @@ public class TalkManager : MonoBehaviour
 	public string[] Names;
 	public string[] Talks;
 	public string[] Pictrues;
+	public bool[] left;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -16,7 +17,7 @@ public class TalkManager : MonoBehaviour
 			List<TalkRoot.TalkInfo> talkInfoList = new List<TalkRoot.TalkInfo>();
 			for (int i = 0; i < Names.Length; i++)
 			{
-				talkInfoList.Add(new TalkRoot.TalkInfo(Names[i], Talks[i], Pictrues[i]));
+				talkInfoList.Add(new TalkRoot.TalkInfo(Names[i], Talks[i], Pictrues[i],left[i]));
 			}
 			TalkRoot.ShowTalkList(talkInfoList);
 		}

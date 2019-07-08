@@ -10,16 +10,20 @@ public class EndManager : MonoBehaviour
         if (collision.tag == "H")
         {
             List<TalkRoot.TalkInfo> talkInfoList = new List<TalkRoot.TalkInfo>();
-            talkInfoList.Add(new TalkRoot.TalkInfo("", "", ""));
-            talkInfoList.Add(new TalkRoot.TalkInfo("兔兔：", "有些事情只是一厢情愿\n纵使历经千辛万苦\n终究你还是不明白", "head/woman"));
-            TalkRoot.ShowTalkList(talkInfoList);
-        }
+			talkInfoList.Add(new TalkRoot.TalkInfo("小兔:", "兔兔我来啦......\n", "head/man", true));
+			talkInfoList.Add(new TalkRoot.TalkInfo("兔兔：", "谢谢你的好意，可是你不懂我想要什么...", "head/woman"));
+			talkInfoList.Add(new TalkRoot.TalkInfo("小兔:", "这...为什么？\n", "head/man", true));
+			talkInfoList.Add(new TalkRoot.TalkInfo("兔兔：", "这一路，你避开的自认为的危险，只是你的一厢情愿\n", "head/woman"));
+			talkInfoList.Add(new TalkRoot.TalkInfo("兔兔：", "这一切本就没有好坏之分，切身体会你才会明白\n", "head/woman"));
+			TalkRoot.ShowTalkList(talkInfoList,"Start");
+			
+		}
         else if (collision.tag == "Ci")
         {
             List<TalkRoot.TalkInfo> talkInfoList = new List<TalkRoot.TalkInfo>();
-            talkInfoList.Add(new TalkRoot.TalkInfo("", "", ""));
-            talkInfoList.Add(new TalkRoot.TalkInfo("兔兔：", "汝之蜜糖，吾之砒霜\n你是第一个明白这个道理的人\n世间并不是非黑即白\n另一个想法之下便是另一个世界", "head/woman"));
-            TalkRoot.ShowTalkList(talkInfoList);
+			talkInfoList.Add(new TalkRoot.TalkInfo("小兔:", "兔兔我来啦...\n现在我才明白，心与心的形状虽然不同，却并不是非对错分明\n互相理解远比一厢情愿的付出重要", "head/man", true));
+			talkInfoList.Add(new TalkRoot.TalkInfo("兔兔：", "谢谢你！", "head/woman"));
+            TalkRoot.ShowTalkList(talkInfoList,"Start");
         }
     }
     // Start is called before the first frame update

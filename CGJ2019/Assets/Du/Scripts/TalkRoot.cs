@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TalkRoot : MonoBehaviour
 {
     private static TalkRoot s_talkRoot;
 
     private int showIndex = 0;
+	private static string nextScene;
     public class TalkInfo
     {
         public string name;
@@ -24,10 +26,12 @@ public class TalkRoot : MonoBehaviour
         }
     }
     private List<TalkInfo> talkInfoList = new List<TalkInfo>();
+	private TypewriterEffect Typewriter;
     // Start is called before the first frame update
     void Start()
     {
         s_talkRoot = this;
+		Typewriter = WillTool.GetChildInDepth<Text>("Content", transform).GetComponent<TypewriterEffect>();
         FirtInit();
     }
 
@@ -39,14 +43,15 @@ public class TalkRoot : MonoBehaviour
     private void FirtInit()
     {
         List<TalkInfo> talkInfoList = new List<TalkInfo>();
-        talkInfoList.Add(new TalkInfo("Rhern:", "唔……只是一场梦么……\n（揉揉耳朵）", null));
-        talkInfoList.Add(new TalkInfo("Rhern:", "我要继续出发了，还有人在地底等我", "head/woman", true));
-        talkInfoList.Add(new TalkInfo("Rhern:", "这个斧子是……啊！莫非真是命中注定？\n（按↓交互，←→移动，↑跳跃）", "head/woman", true));
+        talkInfoList.Add(new TalkInfo("小兔:", "唔……只是一场梦么……\n（揉揉耳朵）\n兔兔……难到真的存在另一个世界吗？", "head/man",true));
+        talkInfoList.Add(new TalkInfo("小兔:", "这个斧子是……啊！莫非梦中的一切都是真的？\n", "head/man",true));
+        talkInfoList.Add(new TalkInfo("小兔:", "我要出发了！兔兔还在地底等我！\n（↓：交互 ←,→：移动 ↑：跳跃）\n（→↑,←↑：爬墙跳跃 ↑↑：双跳）", "head/man",true));
 		ShowTalkList(talkInfoList);
     }
 
-    public static void ShowTalkList(List<TalkInfo> talkInfoList)
+    public static void ShowTalkList(List<TalkInfo> talkInfoList, string scene=null)
     {
+		nextScene = scene;
         s_talkRoot.showIndex = 0;
         s_talkRoot.talkInfoList = talkInfoList;
         s_talkRoot.gameObject.SetActive(true);
@@ -55,15 +60,27 @@ public class TalkRoot : MonoBehaviour
 
     public void Click()
     {
-        showIndex++;
-        if (showIndex < talkInfoList.Count)
-        {
-            ShowTalk(talkInfoList[showIndex]);
-        } else
-        {
-            this.gameObject.SetActive(false);
-			PlayerManager.UnLock();
-
+		if (!Typewriter.isActive)
+		{
+			showIndex++;
+			if (showIndex < talkInfoList.Count)
+			{
+				ShowTalk(talkInfoList[showIndex]);
+			}
+			else
+			{
+				this.gameObject.SetActive(false);
+				PlayerManager.UnLock();
+				if (nextScene != null)
+				{
+					SceneManager.LoadScene(nextScene);
+					nextScene = null;
+				}
+			}
+		}
+		else
+		{
+			Typewriter.OnFinish();
 		}
 	}
 
